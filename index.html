@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="GOOD FINE DINING - Atmosfera rilassante, ingredienti esclusivi, vasta selezione di vini, ospitalità e passione."
+    />
+    <title>GOOD FINE DINING</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-header__brand" href="#top">GOOD FINE DINING</a>
+        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span class="sr-only">Apri il menu</span>
+          <span class="site-header__toggle-line" aria-hidden="true"></span>
+          <span class="site-header__toggle-line" aria-hidden="true"></span>
+          <span class="site-header__toggle-line" aria-hidden="true"></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Navigazione principale" data-state="closed">
+          <a href="#cucina">LA NOSTRA CUCINA</a>
+          <a href="#ingredienti">INGREDIENTI SELEZIONATI</a>
+          <a href="#cantina">LA CANTINA</a>
+          <a href="#proposte">LE NOSTRE PROPOSTE</a>
+          <a class="site-nav__cta" href="tel:+390881123456">Prenota ora</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" data-animate>
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="hero__inner">
+          <div class="hero__content" data-animate style="--delay: 0.05s">
+            <p class="hero__eyebrow">GOOD FINE DINING</p>
+            <h1>Atmosfera rilassante, ingredienti esclusivi, vasta selezione di vini, ospitalità e passione</h1>
+            <div class="hero__buttons">
+              <a class="button button--accent" href="tel:+390881123456">Prenota telefonicamente</a>
+              <a class="button button--surface" href="https://wa.me/390881123456" target="_blank" rel="noreferrer noopener">
+                Scrivici su WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--intro" id="cucina">
+        <div class="section__inner">
+          <div class="split" data-animate>
+            <div class="split__content">
+              <h2>LA NOSTRA CUCINA</h2>
+              <p>Tradizione ed innovazione si incontrano in ogni piatto, creando momenti di qualità ed autentica convivialità.</p>
+            </div>
+            <figure class="split__media">
+              <img
+                src="https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?auto=format&fit=crop&w=1200&q=80"
+                alt="Chef al lavoro in cucina"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--ingredients" id="ingredienti">
+        <div class="section__inner">
+          <div class="split split--reverse" data-animate style="--delay: 0.08s">
+            <div class="split__content">
+              <h2>INGREDIENTI SELEZIONATI</h2>
+              <p>Scegliamo con cura le migliori materie prime ed i prodotti di qualità per ogni piatto.</p>
+            </div>
+            <figure class="split__media">
+              <img
+                src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=80"
+                alt="Ingredienti freschi su un tavolo"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--experience" id="cantina">
+        <div class="section__inner">
+          <div class="experience">
+            <article class="experience__item" data-animate>
+              <div class="experience__content">
+                <h2>LA CUCINA</h2>
+                <p>Interpretata con grande qualità e creatività.</p>
+              </div>
+              <figure class="experience__media">
+                <img
+                  src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80"
+                  alt="Dettaglio di un piatto gourmet"
+                />
+              </figure>
+            </article>
+            <article class="experience__item experience__item--reverse" data-animate style="--delay: 0.08s">
+              <div class="experience__content">
+                <h2>LA CANTINA</h2>
+                <p>Curata e selezionata per accompagnare al meglio ogni piatto</p>
+              </div>
+              <figure class="experience__media">
+                <img
+                  src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=1200&q=80"
+                  alt="Bottiglie di vino in cantina"
+                />
+              </figure>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--proposte" id="proposte">
+        <div class="section__inner">
+          <header class="section__header" data-animate>
+            <h2>LE NOSTRE PROPOSTE</h2>
+            <p>Dalla cena di tutti i giorni alle occasioni speciali, ogni momento ha la sua proposta ideale.</p>
+          </header>
+          <div class="cards">
+            <article class="card" data-animate style="--delay: 0.05s">
+              <h3>MENU À LA CARTE</h3>
+              <p>Possibilità di scegliere tra una selezione di piatti gustosi ed armoniosi.</p>
+            </article>
+            <article class="card" data-animate style="--delay: 0.1s">
+              <h3>MENU DEGUSTAZIONE</h3>
+              <p>Occasione per organizzare un percorso con abbinamenti cibo/vino che rappresenta la nostra filosofia di ristorazione.</p>
+            </article>
+            <article class="card" data-animate style="--delay: 0.15s">
+              <h3>EVENTI PRIVATI</h3>
+              <p>Menù personalizzati per celebrare le occasioni speciali, con menù dedicati alle vostre esigenze</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--cta" id="contatti">
+        <div class="section__inner">
+          <div class="cta" data-animate>
+            <div class="cta__content">
+              <h2>HAI ESIGENZE PARTICOLARI?</h2>
+              <p>Contattaci per creare un'esperienza su misura per te e i tuoi ospiti. Saremo felici di organizzare il tuo evento perfetto.</p>
+            </div>
+            <div class="cta__note">
+              <p>Vieni a trovarci.</p>
+              <p>Ti aspettiamo per condividere insieme la passione per la buona cucina.</p>
+            </div>
+            <div class="cta__actions">
+              <a class="button button--accent" href="tel:+390881123456">Chiama ora</a>
+              <a class="button button--surface" href="https://wa.me/390881123456" target="_blank" rel="noreferrer noopener">
+                Scrivici su WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand" data-animate>
+          <p class="footer__brand-name">GOOD FINE DINING</p>
+        </div>
+        <div class="footer__grid">
+          <div class="footer__group" data-animate style="--delay: 0.05s">
+            <h3>Contatti</h3>
+            <ul>
+              <li><a href="tel:+390881123456">+39 0881 123456</a></li>
+              <li><a href="mailto:info@goodfoggia.it">info@goodfoggia.it</a></li>
+            </ul>
+          </div>
+          <div class="footer__group" data-animate style="--delay: 0.08s">
+            <h3>Indirizzo</h3>
+            <address>
+              Via Example, 123<br />
+              71121 Foggia (FG)
+            </address>
+            <a class="footer__directions" href="https://www.google.com/maps?q=Via+Example,+123,+71121+Foggia" target="_blank" rel="noreferrer noopener">
+              Ottieni indicazioni
+            </a>
+          </div>
+          <div class="footer__group" data-animate style="--delay: 0.11s">
+            <h3>Orari di apertura</h3>
+            <ul class="footer__hours">
+              <li><span>Martedì - Giovedì</span><span>19:30 - 00:00</span></li>
+              <li><span>Venerdì - Sabato</span><span>19:30 - 01:00</span></li>
+              <li><span>Domenica</span><span>19:30 - 00:00</span></li>
+              <li><span>Lunedì</span><span>Chiuso</span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer__note">© GOOD FINE DINING. Tutti i diritti riservati.</p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const header = document.querySelector('.site-header');
+        const nav = document.querySelector('#site-nav');
+        const toggle = document.querySelector('.site-header__toggle');
+        const toggleLabel = toggle?.querySelector('.sr-only');
+        const smoothLinks = document.querySelectorAll('a[href^="#"]');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        const closeNav = () => {
+          if (!nav) return;
+          nav.dataset.state = 'closed';
+          if (toggle) {
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+          if (toggleLabel) {
+            toggleLabel.textContent = 'Apri il menu';
+          }
+          document.body.classList.remove('nav-open');
+        };
+
+        const openNav = () => {
+          if (!nav) return;
+          nav.dataset.state = 'open';
+          if (toggle) {
+            toggle.setAttribute('aria-expanded', 'true');
+          }
+          if (toggleLabel) {
+            toggleLabel.textContent = 'Chiudi il menu';
+          }
+          document.body.classList.add('nav-open');
+        };
+
+        toggle?.addEventListener('click', () => {
+          if (!nav) return;
+          const isOpen = nav.dataset.state === 'open';
+          if (isOpen) {
+            closeNav();
+          } else {
+            openNav();
+          }
+        });
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth >= 768) {
+            closeNav();
+          }
+        });
+
+        document.addEventListener('click', (event) => {
+          if (!nav || nav.dataset.state !== 'open') return;
+          if (toggle?.contains(event.target) || nav.contains(event.target)) {
+            return;
+          }
+          closeNav();
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          if (!nav || nav.dataset.state !== 'open') {
+            return;
+          }
+          closeNav();
+          toggle?.focus();
+        });
+
+        const scrollToTarget = (target) => {
+          const offset = header ? header.offsetHeight : 0;
+          const destination = target.getBoundingClientRect().top + window.pageYOffset - offset + 8;
+
+          if (prefersReducedMotion.matches) {
+            window.scrollTo(0, destination);
+            return;
+          }
+
+          const start = window.pageYOffset;
+          const distance = destination - start;
+          const duration = 720;
+          let startTime = null;
+
+          const easeInOutCubic = (time) =>
+            time < 0.5 ? 4 * time * time * time : 1 - Math.pow(-2 * time + 2, 3) / 2;
+
+          const animateScroll = (currentTime) => {
+            if (startTime === null) {
+              startTime = currentTime;
+            }
+
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = easeInOutCubic(progress);
+
+            window.scrollTo(0, start + distance * easedProgress);
+
+            if (elapsed < duration) {
+              window.requestAnimationFrame(animateScroll);
+            }
+          };
+
+          window.requestAnimationFrame(animateScroll);
+        };
+
+        smoothLinks.forEach((link) => {
+          link.addEventListener('click', (event) => {
+            const hash = link.getAttribute('href');
+            if (!hash || hash === '#' || hash.startsWith('#!')) {
+              return;
+            }
+
+            const target = document.querySelector(hash);
+            if (!target) {
+              return;
+            }
+
+            event.preventDefault();
+            closeNav();
+            scrollToTarget(target);
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
