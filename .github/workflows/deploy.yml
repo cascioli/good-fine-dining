@@ -35,13 +35,6 @@ jobs:
           server-dir: ${{ secrets.ARUBA_SERVER_DIR || '/' }}
           passive: true
           exclude: |
-            **/.git*
-            **/.github/**
-            **/node_modules/**
-            **/.DS_Store
-            **/README.md
-            **/package*.json
-            **/vite.config.*
-            **/webpack.config.*
-            **/vite.config.*
-            **/webpack.config.*
+            **/*                     # esclude tutto...
+            !index.html              # ...ma include index.html
+            !style.css               # ...e include style.css
