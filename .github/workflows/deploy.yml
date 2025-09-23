@@ -1,0 +1,48 @@
+name: Deploy to Aruba (FTPS)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Se hai un build step (es. npm run build), scommenta:
+      # - name: Setup Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "20"
+      # - name: Install deps
+      #   run: npm ci
+      # - name: Build
+      #   run: npm run build
+
+      # Se il sito da pubblicare è in una cartella (es. dist/), imposta local-dir: dist
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.ARUBA_FTP_SERVER }}
+          username: ${{ secrets.ARUBA_FTP_USERNAME }}
+          password: ${{ secrets.ARUBA_FTP_PASSWORD }}
+          port: ${{ secrets.ARUBA_FTP_PORT || 21 }}
+          protocol: ftps
+          # Cartella locale da pubblicare:
+          local-dir: ./          # oppure ./dist/ se fai build
+          # Cartella remota su Aruba:
+          server-dir: ${{ secrets.ARUBA_SERVER_DIR || '/' }}
+          passive: true
+          # Evita di caricare file inutili
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+            **/.DS_Store
+            **/README.md
+            **/package*.json
+            **/vite.config.*
+            **/webpack.config.*
