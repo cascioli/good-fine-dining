@@ -197,7 +197,15 @@ main {
   max-width: 720px;
 }
 
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2.5rem;
+}
+
 .hero__eyebrow {
+  font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.4em;
   font-size: 0.85rem;
@@ -217,7 +225,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 }
 
 .button {
@@ -231,6 +239,45 @@ main {
   text-transform: uppercase;
   font-weight: 500;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.button--accent {
+  background: linear-gradient(135deg, var(--color-accent), #a8743f);
+  color: #fffaf2;
+  box-shadow: var(--shadow-soft);
+}
+
+.button--accent:hover,
+.button--accent:focus {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-strong);
+  background: linear-gradient(135deg, #c5975e, var(--color-accent));
+}
+
+.button--outline {
+  border: 1px solid rgba(36, 23, 15, 0.2);
+  color: var(--color-text);
+  background: rgba(246, 241, 234, 0.5);
+}
+
+.button--outline:hover,
+.button--outline:focus {
+  transform: translateY(-3px);
+  background: rgba(246, 241, 234, 0.75);
+  box-shadow: var(--shadow-soft);
+}
+
+.button--surface {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(36, 23, 15, 0.12);
+  color: var(--color-text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.button--surface:hover,
+.button--surface:focus {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
 }
 
 .button--light {
@@ -260,6 +307,27 @@ main {
 .section {
   padding: clamp(4.5rem, 9vw, 6.5rem) 1.5rem;
   position: relative;
+}
+
+.section__actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.section__actions--inline {
+  margin-top: 1.5rem;
+}
+
+.section__actions--center {
+  justify-content: center;
+}
+
+.section__actions--stack {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
 }
 
 .section::before {
@@ -567,6 +635,42 @@ main {
   text-transform: uppercase;
 }
 
+.quick-actions {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 20;
+}
+
+.quick-actions__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  background: rgba(36, 23, 15, 0.82);
+  color: #fffaf2;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  box-shadow: var(--shadow-soft);
+}
+
+.quick-actions__link:hover,
+.quick-actions__link:focus {
+  transform: translateY(-3px);
+  background: rgba(36, 23, 15, 0.92);
+  box-shadow: var(--shadow-strong);
+}
+
+.quick-actions__label {
+  white-space: nowrap;
+}
+
 @media (max-width: 960px) {
   .site-nav {
     gap: 1rem;
@@ -594,6 +698,21 @@ main {
     row-gap: 0.75rem;
   }
 
+  .quick-actions {
+    right: 1rem;
+    left: 1rem;
+    bottom: 1rem;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .quick-actions__link {
+    flex: 1 1 140px;
+    padding-inline: 1rem;
+  }
+
   main {
     padding-top: 6.5rem;
   }
@@ -618,7 +737,8 @@ main {
   .button,
   .site-nav a,
   .experience__item,
-  .footer__group a {
+  .footer__group a,
+  .quick-actions__link {
     transition-duration: 0s !important;
   }
 }

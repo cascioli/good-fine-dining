@@ -27,6 +27,7 @@ Tutti i testi sono forniti dal cliente e riportati integralmente come da specifi
 .
 ├── index.html      # Struttura del markup e metadati SEO
 ├── styles.css      # Stili globali e responsive design
+├── script.js       # Comportamento di scroll fluido
 ├── LICENSE         # Licenza del progetto
 └── README.md       # Documentazione e istruzioni
 ```
