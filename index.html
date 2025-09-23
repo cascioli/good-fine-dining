@@ -207,6 +207,7 @@
         const toggle = document.querySelector('.site-header__toggle');
         const toggleLabel = toggle?.querySelector('.sr-only');
         const smoothLinks = document.querySelectorAll('a[href^="#"]');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
         const closeNav = () => {
           if (!nav) return;
@@ -268,14 +269,39 @@
         });
 
         const scrollToTarget = (target) => {
-          const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
-          window.requestAnimationFrame(() => {
-            const offset = header ? header.offsetHeight : 0;
-            window.scrollTo({
-              top: targetTop - offset + 8,
-              behavior: 'smooth',
-            });
-          });
+          const offset = header ? header.offsetHeight : 0;
+          const destination = target.getBoundingClientRect().top + window.pageYOffset - offset + 8;
+
+          if (prefersReducedMotion.matches) {
+            window.scrollTo(0, destination);
+            return;
+          }
+
+          const start = window.pageYOffset;
+          const distance = destination - start;
+          const duration = 720;
+          let startTime = null;
+
+          const easeInOutCubic = (time) =>
+            time < 0.5 ? 4 * time * time * time : 1 - Math.pow(-2 * time + 2, 3) / 2;
+
+          const animateScroll = (currentTime) => {
+            if (startTime === null) {
+              startTime = currentTime;
+            }
+
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = easeInOutCubic(progress);
+
+            window.scrollTo(0, start + distance * easedProgress);
+
+            if (elapsed < duration) {
+              window.requestAnimationFrame(animateScroll);
+            }
+          };
+
+          window.requestAnimationFrame(animateScroll);
         };
 
         smoothLinks.forEach((link) => {
