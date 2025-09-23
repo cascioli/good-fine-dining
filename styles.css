@@ -1,0 +1,229 @@
+:root {
+  color-scheme: light;
+  --font-display: 'Playfair Display', 'Times New Roman', serif;
+  --font-sans: 'Work Sans', 'Helvetica Neue', Arial, sans-serif;
+  --color-bg: #f6f1ea;
+  --color-surface: rgba(255, 255, 255, 0.85);
+  --color-text: #261b14;
+  --color-accent: #b88a54;
+  --color-muted: rgba(38, 27, 20, 0.65);
+  --max-width: 1100px;
+  --shadow-soft: 0 20px 60px rgba(38, 27, 20, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 80vh;
+  padding: 4rem 1.5rem;
+  background: linear-gradient(135deg, rgba(38, 27, 20, 0.75), rgba(38, 27, 20, 0.35)),
+    url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1600&q=80') center / cover no-repeat fixed;
+  color: white;
+  text-align: center;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(38, 27, 20, 0.55) 0%, rgba(38, 27, 20, 0.8) 100%);
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  max-width: 760px;
+  z-index: 1;
+}
+
+.hero__eyebrow {
+  letter-spacing: 0.4em;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 1.5rem;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4vw + 1rem, 3.6rem);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.section {
+  padding: 4.5rem 1.5rem;
+}
+
+.section--highlight {
+  background-color: transparent;
+}
+
+.section__inner {
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+
+.section__block {
+  background-color: var(--color-surface);
+  padding: 2.5rem;
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(6px);
+  margin-bottom: 2rem;
+}
+
+.section__block h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.section__block p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.section--proposte {
+  background: linear-gradient(145deg, rgba(184, 138, 84, 0.12), rgba(184, 138, 84, 0.28));
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section__header h2 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.section__header p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}
+
+.cards {
+  display: grid;
+  gap: 2rem;
+}
+
+.card {
+  background-color: #fffdf8;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px rgba(38, 27, 20, 0.18);
+}
+
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.section--cta {
+  background: #261b14;
+  color: white;
+  padding-block: 5rem;
+}
+
+.cta {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.cta h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  margin-bottom: 2.5rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.05rem;
+}
+
+.footer {
+  background: #1b120d;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.footer p {
+  margin: 0.35rem 0;
+  font-size: 1.05rem;
+}
+
+@media (min-width: 720px) {
+  .section__block {
+    display: grid;
+    grid-template-columns: 0.45fr 1fr;
+    align-items: start;
+    gap: 1.5rem;
+  }
+
+  .section__block h2 {
+    margin-bottom: 0;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    min-height: 92vh;
+  }
+
+  .hero__content {
+    max-width: 820px;
+  }
+}
