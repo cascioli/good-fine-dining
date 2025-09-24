@@ -1,0 +1,24 @@
+name: Cleanup preview (on PR close)
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create empty dir
+        run: mkdir empty
+
+      - name: Wipe preview folder
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.ARUBA_FTP_SERVER }}
+          username: ${{ secrets.ARUBA_FTP_USERNAME }}
+          password: ${{ secrets.ARUBA_FTP_PASSWORD }}
+          protocol: ftps
+          passive: true
+          local-dir: ./empty
+          server-dir: ${{ secrets.ARUBA_SERVER_DIR_PREV }}pr-${{ github.event.pull_request.number }}/
+          dangerous-clean-slate: true   # ⚠️ cancella il contenuto della cartella di preview
