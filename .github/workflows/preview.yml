@@ -1,0 +1,60 @@
+name: Preview deploy (PR)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-and-preview:
+    runs-on: ubuntu-latest
+    outputs:
+      preview_url: ${{ steps.compute.outputs.url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Se hai un build step, sblocca queste righe
+      # - uses: actions/setup-node@v4
+      #   with: { node-version: "20" }
+      # - run: npm ci
+      # - run: npm run build
+
+      - id: compute
+        run: |
+          PR=${{ github.event.pull_request.number }}
+          echo "dir=${{ secrets.ARUBA_SERVER_DIR_PREV }}pr-${PR}/" >> $GITHUB_OUTPUT
+          echo "url=https://tuodominio/previews/pr-${PR}/" >> $GITHUB_OUTPUT
+
+      # === Pubblica l'anteprima ===
+      - name: Deploy preview via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.ARUBA_FTP_SERVER }}
+          username: ${{ secrets.ARUBA_FTP_USERNAME }}
+          password: ${{ secrets.ARUBA_FTP_PASSWORD }}
+          protocol: ftps
+          passive: true
+          # Se hai un output di build, usa ./dist/
+          local-dir: ./
+          server-dir: ${{ steps.compute.outputs.dir }}
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+            **/.DS_Store
+
+      - name: Commenta il link di preview sulla PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: preview-url
+          message: |
+            🚀 **Anteprima pronta:** ${{ steps.compute.outputs.url }}
+
+  # === Semaforo: tua approvazione per inviare al cliente ===
+  gate-review:
+    needs: build-and-preview
+    runs-on: ubuntu-latest
+    environment:
+      name: review
+      url: ${{ needs.build-and-preview.outputs.preview_url }}
+    steps:
+      - run: echo "Approvazione interna per inviare al cliente."
