@@ -1,0 +1,35 @@
+name: Deploy to Production (main)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production   # ← richiede la tua approvazione finale
+      url: https://tuodominio/
+    steps:
+      - uses: actions/checkout@v4
+
+      # - uses: actions/setup-node@v4
+      #   with: { node-version: "20" }
+      # - run: npm ci
+      # - run: npm run build
+
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.ARUBA_FTP_SERVER }}
+          username: ${{ secrets.ARUBA_FTP_USERNAME }}
+          password: ${{ secrets.ARUBA_FTP_PASSWORD }}
+          protocol: ftps
+          passive: true
+          local-dir: ./            # oppure ./dist/
+          server-dir: ${{ secrets.ARUBA_SERVER_DIR_PROD }}
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+            **/.DS_Store
