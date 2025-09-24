@@ -23,6 +23,6 @@ jobs:
           username: ${{ secrets.ARUBA_FTP_USERNAME }}
           password: ${{ secrets.ARUBA_FTP_PASSWORD }}
           protocol: ftps
-          local-dir: ./empty
+          local-dir: ./empty/
           server-dir: ${{ secrets.ARUBA_SERVER_DIR_PREV }}pr-${{ github.event.pull_request.number }}/
           dangerous-clean-slate: true
