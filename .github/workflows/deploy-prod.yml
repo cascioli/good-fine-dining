@@ -31,6 +31,5 @@ jobs:
           username: ${{ secrets.ARUBA_FTP_USERNAME }}
           password: ${{ secrets.ARUBA_FTP_PASSWORD }}
           protocol: ftps
-          passive: true
           local-dir: ./deploy/
           server-dir: ${{ secrets.ARUBA_SERVER_DIR_PROD }}   # es. /www/
