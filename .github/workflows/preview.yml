@@ -58,3 +58,13 @@ jobs:
       url: ${{ needs.build-and-preview.outputs.preview_url }}
     steps:
       - run: echo "Approvazione interna per inviare al cliente."
+
+
+  gate-client:
+    needs: gate-review
+    runs-on: ubuntu-latest
+    environment:
+      name: client-approval
+      url: ${{ needs.build-and-preview.outputs.preview_url }}
+    steps:
+      - run: echo "Cliente approvato (conferma ricevuta offline)."
