@@ -325,6 +325,14 @@ body.nav-open .site-header__toggle-line:nth-of-type(3) {
 .split {
   display: grid;
   gap: clamp(1.75rem, 4vw, 2.5rem);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.split--reverse {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(246, 241, 234, 0.7));
 }
 
 .split__content h2 {
@@ -608,6 +616,7 @@ body.nav-open .site-header__toggle-line:nth-of-type(3) {
   .split {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
+    gap: clamp(2rem, 4vw, 3rem);
   }
 
   .split--reverse {
