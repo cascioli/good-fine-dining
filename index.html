@@ -19,19 +19,22 @@
   <body>
     <header class="site-header">
       <div class="site-header__inner">
-        <a class="site-header__brand" href="#top">GOOD FINE DINING</a>
-        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          <span class="sr-only">Apri il menu</span>
-          <span class="site-header__toggle-line" aria-hidden="true"></span>
-          <span class="site-header__toggle-line" aria-hidden="true"></span>
-          <span class="site-header__toggle-line" aria-hidden="true"></span>
-        </button>
-        <nav class="site-nav" id="site-nav" aria-label="Navigazione principale" data-state="closed">
+        <div class="site-header__branding">
+          <a class="site-header__brand" href="#top">GOOD FINE DINING</a>
+          <a class="site-header__cta" href="tel:+393388906835">
+            <span class="sr-only">Prenota ora</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+              <path
+                d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011-.24 11.36 11.36 0 003.56.57 1 1 0 011 1v3.57a1 1 0 01-1 1A17.5 17.5 0 012.5 6a1 1 0 011-1H7a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.24 1z"
+              />
+            </svg>
+          </a>
+        </div>
+        <nav class="site-nav" id="site-nav" aria-label="Navigazione principale">
           <a href="#cucina">LA NOSTRA CUCINA</a>
           <a href="#ingredienti">INGREDIENTI SELEZIONATI</a>
           <a href="#cantina">LA CANTINA</a>
           <a href="#proposte">LE NOSTRE PROPOSTE</a>
-          <a class="site-nav__cta" href="tel:+393388906835">Prenota ora</a>
         </nav>
       </div>
     </header>
@@ -207,70 +210,8 @@
     <script>
       (function () {
         const header = document.querySelector('.site-header');
-        const nav = document.querySelector('#site-nav');
-        const toggle = document.querySelector('.site-header__toggle');
-        const toggleLabel = toggle?.querySelector('.sr-only');
         const smoothLinks = document.querySelectorAll('a[href^="#"]');
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-        const closeNav = () => {
-          if (!nav) return;
-          nav.dataset.state = 'closed';
-          if (toggle) {
-            toggle.setAttribute('aria-expanded', 'false');
-          }
-          if (toggleLabel) {
-            toggleLabel.textContent = 'Apri il menu';
-          }
-          document.body.classList.remove('nav-open');
-        };
-
-        const openNav = () => {
-          if (!nav) return;
-          nav.dataset.state = 'open';
-          if (toggle) {
-            toggle.setAttribute('aria-expanded', 'true');
-          }
-          if (toggleLabel) {
-            toggleLabel.textContent = 'Chiudi il menu';
-          }
-          document.body.classList.add('nav-open');
-        };
-
-        toggle?.addEventListener('click', () => {
-          if (!nav) return;
-          const isOpen = nav.dataset.state === 'open';
-          if (isOpen) {
-            closeNav();
-          } else {
-            openNav();
-          }
-        });
-
-        window.addEventListener('resize', () => {
-          if (window.innerWidth >= 768) {
-            closeNav();
-          }
-        });
-
-        document.addEventListener('click', (event) => {
-          if (!nav || nav.dataset.state !== 'open') return;
-          if (toggle?.contains(event.target) || nav.contains(event.target)) {
-            return;
-          }
-          closeNav();
-        });
-
-        document.addEventListener('keydown', (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          if (!nav || nav.dataset.state !== 'open') {
-            return;
-          }
-          closeNav();
-          toggle?.focus();
-        });
 
         const scrollToTarget = (target) => {
           const offset = header ? header.offsetHeight : 0;
@@ -321,7 +262,6 @@
             }
 
             event.preventDefault();
-            closeNav();
             scrollToTarget(target);
           });
         });
