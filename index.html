@@ -14,21 +14,20 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=09102025-2027" />
   </head>
   <body>
     <header class="site-header">
       <div class="site-header__inner">
         <a class="site-header__brand" href="#top">GOOD FINE DINING</a>
-        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          <span class="sr-only">Apri il menu</span>
-          <span class="site-header__toggle-line" aria-hidden="true"></span>
-          <span class="site-header__toggle-line" aria-hidden="true"></span>
-          <span class="site-header__toggle-line" aria-hidden="true"></span>
-        </button>
-        <nav class="site-nav" id="site-nav" aria-label="Navigazione principale" data-state="closed">
-          <a class="site-nav__cta" href="tel:+393388906835">Prenota ora</a>
-        </nav>
+        <a class="site-header__cta" href="tel:+393388906835">
+          <span class="sr-only">Prenota ora</span>
+          <svg class="site-header__cta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M8.44 4.63c.24-.54.36-.82.36-1.07 0-.57-.43-1.21-.96-1.36L5.7 1.58c-.54-.15-1.14.06-1.46.52-.48.69-1.24 1.85-1.45 3.25-.29 1.89.4 4.25 2.06 6.99 1.88 3.1 4.27 5.49 7.17 7.17 2.44 1.43 4.79 2.13 6.93 2.06 1.35-.05 2.49-.77 3.16-1.29.44-.34.63-.95.47-1.49l-.66-2.13c-.18-.59-.79-1.01-1.39-1.01-.27 0-.56.1-1.12.35l-2.18.97a1.51 1.51 0 0 1-1.45-.17c-.6-.42-1.49-1.07-2.5-1.98-1.1-.99-1.88-1.88-2.34-2.54a1.51 1.51 0 0 1-.12-1.43l.94-2.13c.24-.54.35-.82.35-1.09 0-.6-.39-1.21-.98-1.4z"
+            />
+          </svg>
+        </a>
       </div>
     </header>
 
@@ -203,70 +202,8 @@
     <script>
       (function () {
         const header = document.querySelector('.site-header');
-        const nav = document.querySelector('#site-nav');
-        const toggle = document.querySelector('.site-header__toggle');
-        const toggleLabel = toggle?.querySelector('.sr-only');
         const smoothLinks = document.querySelectorAll('a[href^="#"]');
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-        const closeNav = () => {
-          if (!nav) return;
-          nav.dataset.state = 'closed';
-          if (toggle) {
-            toggle.setAttribute('aria-expanded', 'false');
-          }
-          if (toggleLabel) {
-            toggleLabel.textContent = 'Apri il menu';
-          }
-          document.body.classList.remove('nav-open');
-        };
-
-        const openNav = () => {
-          if (!nav) return;
-          nav.dataset.state = 'open';
-          if (toggle) {
-            toggle.setAttribute('aria-expanded', 'true');
-          }
-          if (toggleLabel) {
-            toggleLabel.textContent = 'Chiudi il menu';
-          }
-          document.body.classList.add('nav-open');
-        };
-
-        toggle?.addEventListener('click', () => {
-          if (!nav) return;
-          const isOpen = nav.dataset.state === 'open';
-          if (isOpen) {
-            closeNav();
-          } else {
-            openNav();
-          }
-        });
-
-        window.addEventListener('resize', () => {
-          if (window.innerWidth >= 768) {
-            closeNav();
-          }
-        });
-
-        document.addEventListener('click', (event) => {
-          if (!nav || nav.dataset.state !== 'open') return;
-          if (toggle?.contains(event.target) || nav.contains(event.target)) {
-            return;
-          }
-          closeNav();
-        });
-
-        document.addEventListener('keydown', (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          if (!nav || nav.dataset.state !== 'open') {
-            return;
-          }
-          closeNav();
-          toggle?.focus();
-        });
 
         const scrollToTarget = (target) => {
           const offset = header ? header.offsetHeight : 0;
@@ -317,7 +254,6 @@
             }
 
             event.preventDefault();
-            closeNav();
             scrollToTarget(target);
           });
         });
