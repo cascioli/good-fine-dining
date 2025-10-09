@@ -23,6 +23,8 @@ jobs:
           rm -rf deploy && mkdir deploy
           cp index.html deploy/
           cp styles.css deploy/
+          # copia la cartella assets/ se esiste
+          if [ -d assets ]; then cp -R assets deploy/; fi
 
       - name: Deploy via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
