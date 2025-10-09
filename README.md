@@ -1,4 +1,6 @@
 # GOOD FINE DINING – Landing Page
+[![CI](https://github.com/cascioli/good-fine-dining/actions/workflows/deploy-prod.yml/badge.svg)](https://github.com/cascioli/good-fine-dining/actions/workflows/deploy-prod.yml)
+
 
 Landing page statica ispirata al sito good.simonecascioli.it, sviluppata con HTML5 e CSS3 per massimizzare performance, accessibilità e ottimizzazione SEO.
 
