@@ -20,19 +20,21 @@
     <header class="site-header">
       <div class="site-header__inner">
         <a class="site-header__brand" href="#top">GOOD FINE DINING</a>
-        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          <span class="sr-only">Apri il menu</span>
-          <span class="site-header__toggle-line" aria-hidden="true"></span>
-          <span class="site-header__toggle-line" aria-hidden="true"></span>
-          <span class="site-header__toggle-line" aria-hidden="true"></span>
-        </button>
-        <nav class="site-nav" id="site-nav" aria-label="Navigazione principale" data-state="closed">
-          <a href="#cucina">LA NOSTRA CUCINA</a>
-          <a href="#ingredienti">INGREDIENTI SELEZIONATI</a>
-          <a href="#cantina">LA CANTINA</a>
-          <a href="#proposte">LE NOSTRE PROPOSTE</a>
-          <a class="site-nav__cta" href="tel:+393388906835">Prenota ora</a>
-        </nav>
+        <a class="site-header__cta" href="tel:+393388906835">
+          <span class="sr-only">Prenota ora</span>
+          <svg
+            class="site-header__cta-icon bi bi-telephone-fill"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1.885.511a1.745 1.745 0 0 1 2.61.163l1.514 1.887c.329.41.445.957.315 1.466l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.19-.547a1.745 1.745 0 0 1 1.466.315l1.887 1.514c.829.664.905 1.887.163 2.629l-.451.45c-.716.717-1.761 1.02-2.727.684a17.31 17.31 0 0 1-6.571-4.144A17.31 17.31 0 0 1 .752 3.69c-.335-.966-.033-2.011.684-2.727l.45-.451Z"
+            />
+          </svg>
+        </a>
       </div>
     </header>
 
@@ -207,70 +209,8 @@
     <script>
       (function () {
         const header = document.querySelector('.site-header');
-        const nav = document.querySelector('#site-nav');
-        const toggle = document.querySelector('.site-header__toggle');
-        const toggleLabel = toggle?.querySelector('.sr-only');
         const smoothLinks = document.querySelectorAll('a[href^="#"]');
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-        const closeNav = () => {
-          if (!nav) return;
-          nav.dataset.state = 'closed';
-          if (toggle) {
-            toggle.setAttribute('aria-expanded', 'false');
-          }
-          if (toggleLabel) {
-            toggleLabel.textContent = 'Apri il menu';
-          }
-          document.body.classList.remove('nav-open');
-        };
-
-        const openNav = () => {
-          if (!nav) return;
-          nav.dataset.state = 'open';
-          if (toggle) {
-            toggle.setAttribute('aria-expanded', 'true');
-          }
-          if (toggleLabel) {
-            toggleLabel.textContent = 'Chiudi il menu';
-          }
-          document.body.classList.add('nav-open');
-        };
-
-        toggle?.addEventListener('click', () => {
-          if (!nav) return;
-          const isOpen = nav.dataset.state === 'open';
-          if (isOpen) {
-            closeNav();
-          } else {
-            openNav();
-          }
-        });
-
-        window.addEventListener('resize', () => {
-          if (window.innerWidth >= 768) {
-            closeNav();
-          }
-        });
-
-        document.addEventListener('click', (event) => {
-          if (!nav || nav.dataset.state !== 'open') return;
-          if (toggle?.contains(event.target) || nav.contains(event.target)) {
-            return;
-          }
-          closeNav();
-        });
-
-        document.addEventListener('keydown', (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          if (!nav || nav.dataset.state !== 'open') {
-            return;
-          }
-          closeNav();
-          toggle?.focus();
-        });
 
         const scrollToTarget = (target) => {
           const offset = header ? header.offsetHeight : 0;
@@ -321,7 +261,6 @@
             }
 
             event.preventDefault();
-            closeNav();
             scrollToTarget(target);
           });
         });
