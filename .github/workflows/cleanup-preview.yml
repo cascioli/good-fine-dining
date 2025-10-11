@@ -13,6 +13,9 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
+      - id: compute
+        run: echo "dir=${{ secrets.ARUBA_SERVER_DIR_PREV }}pr-${{ github.event.pull_request.number }}/" >> $GITHUB_OUTPUT
+
       - name: Create empty dir
         run: mkdir empty
 
@@ -24,5 +27,5 @@ jobs:
           password: ${{ secrets.ARUBA_FTP_PASSWORD }}
           protocol: ftps
           local-dir: ./empty/
-          server-dir: ${{ secrets.ARUBA_SERVER_DIR_PREV }}pr-${{ github.event.pull_request.number }}/
+          server-dir: ${{ steps.compute.outputs.dir }}
           dangerous-clean-slate: true

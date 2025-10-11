@@ -26,6 +26,84 @@ jobs:
           cp styles.css deploy/
           # copia la cartella assets/ se esiste
           if [ -d assets ]; then cp -R assets deploy/; fi
+          # copia la cartella feedback/ se esiste
+          if [ -d feedback ]; then cp -R feedback deploy/; fi
+
+            # 🔧 Aggiunta: mail_config.php + .htaccess (private/libs) + set_perms.php
+      - name: Generate secrets & protections
+        run: |
+          mkdir -p deploy/feedback/private
+          mkdir -p deploy/feedback/libs
+
+          # mail_config.php
+          cat > deploy/feedback/private/mail_config.php <<'PHP'
+          <?php
+          return [
+              'host'   => '${{ secrets.SMTP_HOST }}',
+              'port'   => (int) '${{ secrets.SMTP_PORT }}',
+              'secure' => '${{ secrets.SMTP_SECURE }}',
+              'user'   => '${{ secrets.SMTP_USER }}',
+              'pass'   => '${{ secrets.SMTP_PASS }}',
+              'from'   => '${{ secrets.SMTP_FROM }}',
+              'to'     => '${{ secrets.SMTP_TO }}',
+          ];
+          PHP
+
+          # .htaccess per private/
+          cat > deploy/feedback/private/.htaccess <<'HT'
+          <FilesMatch "\.(php|ini|env|key|pem)$">
+            Require all denied
+          </FilesMatch>
+          Options -Indexes
+          HT
+
+          # .htaccess per libs/
+          cat > deploy/feedback/libs/.htaccess <<'HT'
+          <FilesMatch "\.php$">
+            Require all denied
+          </FilesMatch>
+          Options -Indexes
+          HT
+
+          # set_perms.php (autodistruggente)
+          cat > deploy/feedback/private/set_perms.php <<'PHP'
+          <?php
+          function chmod_safe(string $path, int $mode): void { @chmod($path, $mode); }
+          function is_php(string $p): bool { return is_file($p) && strtolower(pathinfo($p, PATHINFO_EXTENSION)) === 'php'; }
+          $root = realpath(__DIR__ . '/..'); if(!$root){exit('root?');}
+          $privateDir = realpath($root . '/private') ?: $root . '/private';
+          $libsDir    = realpath($root . '/libs')    ?: $root . '/libs';
+
+          if (is_dir($privateDir)) {
+              chmod_safe($privateDir, 0750);
+              $mailCfg = $privateDir . '/mail_config.php';
+              if (is_file($mailCfg)) chmod_safe($mailCfg, 0640);
+              $ht = $privateDir . '/.htaccess';
+              if (is_file($ht)) chmod_safe($ht, 0644);
+          }
+
+          $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS));
+          foreach ($rii as $fi) {
+              $p = $fi->getPathname();
+              if (strpos($p, DIRECTORY_SEPARATOR.'private'.DIRECTORY_SEPARATOR) !== false) continue;
+              if ($fi->isDir()) { chmod_safe($p, 0755); continue; }
+              if (is_php($p)) chmod_safe($p, 0644);
+              elseif (basename($p)==='.htaccess') chmod_safe($p, 0644);
+              else chmod_safe($p, 0644);
+          }
+
+          if (is_dir($libsDir)) {
+              $rii2 = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($libsDir, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
+              foreach ($rii2 as $fi) {
+                  $p = $fi->getPathname();
+                  if ($fi->isDir()) chmod_safe($p, 0755);
+                  else chmod_safe($p, 0644);
+              }
+          }
+
+          echo "✅ Permessi aggiornati " . date('Y-m-d H:i:s');
+          @unlink(__FILE__);
+          PHP
 
       - id: compute
         run: |
@@ -42,6 +120,12 @@ jobs:
           protocol: ftps
           local-dir: ./deploy/
           server-dir: ${{ steps.compute.outputs.dir }}
+
+      # 🔧 Esegue set_perms.php per correggere i permessi sul server
+            - name: Fix permissions on Aruba
+        run: |
+          PR=${{ github.event.pull_request.number }}
+          curl -s "https://goodfoggia.it/previews/pr-${PR}/feedback/private/set_perms.php" || true
 
       - name: Commenta il link di preview sulla PR
         uses: marocchino/sticky-pull-request-comment@v2
