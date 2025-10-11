@@ -27,22 +27,45 @@
 }
 
 html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
+/* viewport-safe centering, no ghost scroll on mobile */
 body {
   font-family: var(--font-sans);
   background: linear-gradient(145deg, rgba(246, 241, 234, 1), rgba(255, 253, 248, 0.9));
   color: var(--color-text);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  /* centratura affidabile */
+  display: grid;
+  place-items: center;
+
+  /* altezza viewport “reale” con fallback */
+  height: 100vh;        /* fallback universale */
+  height: 100dvh;       /* viewport dinamica (iOS/Android moderni) */
+  min-height: 100svh;   /* small viewport per browser che la supportano */
+
+  /* il padding resta "dentro" l'altezza grazie a border-box del reset */
   padding: clamp(1.5rem, 4vw, 3rem);
+
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+
+  /* consenti lo scroll solo se davvero necessario (contenuto > viewport) */
+  overflow-y: auto;
+}
+
+/* se l'altezza è molto ridotta, lascia crescere la pagina e scrollare */
+@media (max-height: 620px) {
+  body {
+    height: auto;
+    min-height: 100svh; /* o 100vh come fallback */
+  }
+}
+
+/* opzionale: tutela per “isole” con notch / safe area (iOS) */
+@supports (padding: max(0px)) {
+  body {
+    padding-bottom: max(env(safe-area-inset-bottom), clamp(1.5rem, 4vw, 3rem));
+    padding-top: max(env(safe-area-inset-top), clamp(1.5rem, 4vw, 3rem));
+  }
 }
 
 a {
