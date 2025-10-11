@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it" class="no-js">
+  <head>
+    <!-- Meta principali -->
+    <meta charset="utf-8" />
+    <title>Ti sei trovato bene? | GOOD FINE DINING</title>
+    <meta
+      name="description"
+      content="Condividi il tuo feedback con GOOD FINE DINING: recensioni positive o suggerimenti per migliorare."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Font e stile coerenti con il sito principale -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Work+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css?v=20240606" />
+  </head>
+  <body>
+    <!-- ==================== CONTENUTO PRINCIPALE ==================== -->
+    <main class="feedback">
+      <div class="feedback__card" role="region" aria-labelledby="feedback-title">
+        <!-- ==================== TESTATA ==================== -->
+        <header class="feedback__header">
+          <p class="feedback__eyebrow">GOOD FINE DINING</p>
+          <h1 id="feedback-title">Ti sei trovato bene con noi?</h1>
+          <p class="feedback__intro">
+            Raccontacelo in pochi secondi: ci aiuterai a migliorare ogni giorno.
+          </p>
+        </header>
+
+        <!-- ==================== SCELTA PERCORSO ==================== -->
+        <div class="feedback__actions">
+          <a
+            class="feedback__button feedback__button--primary"
+            href="https://g.page/r/CTLmD6wvPeltEAE/review"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Sì, mi sono trovato bene
+          </a>
+
+          <button
+            class="feedback__button feedback__button--secondary"
+            type="button"
+            data-action="open-form"
+            aria-expanded="false"
+            aria-controls="feedback-form"
+          >
+            Non proprio / Voglio lasciare un suggerimento
+          </button>
+        </div>
+
+        <!-- ==================== MODULO DI FEEDBACK ==================== -->
+        <section
+          class="feedback-form"
+          id="feedback-form"
+          data-feedback-form
+          aria-hidden="true"
+        >
+          <h2 class="feedback-form__title">Lasciaci il tuo feedback</h2>
+          <p class="feedback-form__subtitle">
+            Compila il modulo: ti risponderemo al più presto.
+          </p>
+
+          <form class="feedback-form__form" novalidate>
+            <div class="feedback-form__field">
+              <label for="feedback-name">
+                Nome <span class="feedback-form__optional">(facoltativo)</span>
+              </label>
+              <input
+                type="text"
+                id="feedback-name"
+                name="name"
+                maxlength="120"
+                autocomplete="name"
+                inputmode="text"
+              />
+            </div>
+
+            <div class="feedback-form__field">
+              <label for="feedback-email">
+                Email <span class="feedback-form__optional">(facoltativo)</span>
+              </label>
+              <input
+                type="email"
+                id="feedback-email"
+                name="email"
+                maxlength="160"
+                autocomplete="email"
+                inputmode="email"
+              />
+            </div>
+
+            <div class="feedback-form__field">
+              <label for="feedback-message">
+                Messaggio <span class="feedback-form__required">(obbligatorio)</span>
+              </label>
+              <textarea
+                id="feedback-message"
+                name="message"
+                rows="5"
+                maxlength="1000"
+                required
+              ></textarea>
+            </div>
+
+            <!-- Campo honeypot contro gli spam bot -->
+            <div class="feedback-form__honeypot" aria-hidden="true">
+              <label for="feedback-website">Lascia vuoto</label>
+              <input
+                type="text"
+                id="feedback-website"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
+            <button class="feedback-form__submit" type="submit">
+              <span class="feedback-form__submit-text" data-submit-text>Invia feedback</span>
+              <span class="feedback-form__spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+
+          <p
+            class="feedback-form__alert"
+            role="status"
+            aria-live="polite"
+            data-feedback-message
+            hidden
+          ></p>
+        </section>
+
+        <!-- ==================== FALLBACK PER CHI NON USA JAVASCRIPT ==================== -->
+        <noscript>
+          <div class="feedback__noscript">
+            <p>
+              Per inviare un suggerimento scrivi a
+              <a href="mailto:reclami@goodfoggia.it">reclami@goodfoggia.it</a>.
+            </p>
+          </div>
+        </noscript>
+      </div>
+    </main>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script src="script.js?v=20240606" defer></script>
+  </body>
+</html>
