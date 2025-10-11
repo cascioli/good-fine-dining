@@ -122,7 +122,7 @@ jobs:
           server-dir: ${{ steps.compute.outputs.dir }}
 
       # 🔧 Esegue set_perms.php per correggere i permessi sul server
-            - name: Fix permissions on Aruba
+      - name: Fix permissions on Aruba
         run: |
           PR=${{ github.event.pull_request.number }}
           curl -s "https://goodfoggia.it/previews/pr-${PR}/feedback/private/set_perms.php" || true
