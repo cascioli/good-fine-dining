@@ -25,6 +25,8 @@ jobs:
           cp styles.css deploy/
           # copia la cartella assets/ se esiste
           if [ -d assets ]; then cp -R assets deploy/; fi
+          # copia la cartella feedback/ se esiste
+          if [ -d feedback ]; then cp -R feedback deploy/; fi
 
       - name: Deploy via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
