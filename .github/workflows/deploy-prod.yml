@@ -49,9 +49,12 @@ jobs:
           ];
           PHP
 
-          # Protezione della cartella private/
+          # .htaccess per private/ (consente SOLO set_perms.php)
           cat > deploy/feedback/private/.htaccess <<'HT'
-          <FilesMatch "\.(php|ini|env|key|pem)$">
+          <Files "set_perms.php">
+            Require all granted
+          </Files>
+          <FilesMatch "^(?!set_perms\.php$).*\.(php|ini|env|key|pem)$">
             Require all denied
           </FilesMatch>
           Options -Indexes
@@ -73,6 +76,8 @@ jobs:
           $root = realpath(__DIR__ . '/..'); if(!$root){exit('root?');}
           $privateDir = realpath($root . '/private') ?: $root . '/private';
           $libsDir    = realpath($root . '/libs')    ?: $root . '/libs';
+
+          if (isset($_GET['cleanup'])) { @unlink(__FILE__); exit('removed'); }
 
           if (is_dir($privateDir)) {
               chmod_safe($privateDir, 0750);
@@ -118,4 +123,8 @@ jobs:
       # 🔧 Esegue set_perms.php sul server (una sola volta)
       - name: Fix permissions on Aruba
         run: |
-          curl -s "https://goodfoggia.it/feedback/private/set_perms.php" || true
+          curl -fsSL "https://www.goodfoggia.it/feedback/private/set_perms.php" || true
+
+      - name: Cleanup set_perms
+        run: |
+          curl -fsSL "https://www.goodfoggia.it/feedback/private/set_perms.php?cleanup=1" || true
