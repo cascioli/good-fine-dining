@@ -26,6 +26,8 @@ jobs:
           cp styles.css deploy/
           # copia la cartella assets/ se esiste
           if [ -d assets ]; then cp -R assets deploy/; fi
+          # copia la cartella feedback/ se esiste
+          if [ -d feedback ]; then cp -R feedback deploy/; fi
 
       - id: compute
         run: |
